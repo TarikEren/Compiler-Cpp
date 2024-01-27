@@ -32,6 +32,3 @@ public:
 };
 
 #endif //LEXER_CPP_LEXER_HPP
-
-
-//TOKEN: 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
