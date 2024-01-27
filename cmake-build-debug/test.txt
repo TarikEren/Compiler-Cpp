@@ -1,0 +1,7 @@
+var int_var : int = 5;
+var char_var : char = 'a';
+
+fun main() : int {
+
+    return 0;
+}

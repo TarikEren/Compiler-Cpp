@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Lexer_Cpp.dir/main.cpp.o CMakeFiles/Lexer_Cpp.dir/include/Token.cpp.o CMakeFiles/Lexer_Cpp.dir/include/Lexer.cpp.o -o Lexer_Cpp 
