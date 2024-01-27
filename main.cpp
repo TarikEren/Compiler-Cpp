@@ -9,18 +9,17 @@
  *
  * I haven't really thought about the name, so it will be LANG_NAME for a while.
  * It will be a strongly typed language. (None of that stupid dynamically typed stuff.)
- * Semicolons rule.
- * Garbage collection would be amazing but really hard to implement.
  * Main entry point will be a main function that returns an integer. Just like C.
  *
  * ----- Might Add (I'm not really sure about these as they seem daunting.) -----
  * Pointers
  * Bitwise Operations
+ * Garbage Collection
  * Throw - Catch
  * Classes (OOP in general)
  * Typedef
  *
- * The syntax will be something like this:
+ * The syntax will be as follows:
  *
  * ----- Comments -----
  * Same as C.
@@ -53,6 +52,7 @@
  *    "Code"
  *    return 'value';
  * }
+ *
  * "Function 'function name' takes 'arguments' and returns 'value' with return type of 'type'
  * It will support recursion (Scary I know.)
  *
