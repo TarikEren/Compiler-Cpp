@@ -2,7 +2,6 @@
 #include "./include/Lexer.hpp"
 
 // This lexer will be a launching point for me to create a new programming language. For fun.
-// It's not ready yet. At least for my imaginary language.
 
 /*
  * The LANG_NAME Language
