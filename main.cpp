@@ -17,7 +17,8 @@
  * Garbage Collection
  * Throw - Catch
  * Classes (OOP in general)
- * Typedef
+ * Type Defining
+ * Bitwise Operations
  *
  * The syntax will be as follows:
  *
@@ -87,7 +88,6 @@
  * Division:        /
  * Modulo:          %
  *
- * I'm not sure about bitwise operations, so I'll just add arithmetic operations for now.
  *
  * ----- If - Elif - Else -----
  *  if (statement) {
