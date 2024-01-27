@@ -1,4 +1,4 @@
-#include "Token.hpp"
+#include "../include/Token.hpp"
 
 string Token::get_TokenStr() const {
     return this->token_str;

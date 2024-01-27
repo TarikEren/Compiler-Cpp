@@ -1,5 +1,5 @@
-#include "Lexer.hpp"
-#include "Macros.hpp"
+#include "../include/Lexer.hpp"
+#include "../include/Macros.hpp"
 
 Lexer::Lexer()  {
     std::cout << "Lexer initialised\n";
