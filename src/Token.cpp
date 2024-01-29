@@ -35,12 +35,7 @@ Token::Token(string token_str, int token_type) {
     this->token_str = token_obj.token_str;
 }
 
-Token::Token() {
-    std::cout << "Initialised token\n";
-}
-
 Token::~Token() {
     this->token_str.clear();
     this->token_type = 0;
 }
-
