@@ -1,21 +1,24 @@
-#ifndef LEXER_CPP_LEXER_HPP
-#define LEXER_CPP_LEXER_HPP
+#pragma once
 
 #include "Token.hpp"
 #include <fstream>
 #include <sstream>
 
-using fstream = std::fstream;
+using ifstream = std::ifstream;
 using sstream = std::stringstream;
 
 
-class Lexer {
+class Tokenizer {
 private:
     string file_str;
+    //Array properties
     Token** array = nullptr;
-    int size = 0;
+    size_t array_size = 0;
+    //Iterator properties
+    char current = ' ';
+    size_t current_index = 0;
 public:
-    Lexer();
+    Tokenizer();
     void append_token(Token*);
     [[maybe_unused]] void pop(); //Might pop the array one by one as I iterate through it, IDK I haven't done this before.
     void print_tokens();
@@ -24,11 +27,9 @@ public:
     void clean();
     //Implement
     char peek();
-    void consume(); //I don't know how to add this.
-    ~Lexer();
+    void consume(); //TODO: Implement
+    ~Tokenizer();
     void tokenize();
-    bool read_file(const char*);
+    void read_file(const char* filename);
 
 };
-
-#endif //LEXER_CPP_LEXER_HPP
