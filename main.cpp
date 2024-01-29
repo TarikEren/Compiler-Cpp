@@ -1,5 +1,5 @@
 #include "./include/Token.hpp"
-#include "./include/Lexer.hpp"
+#include "./include/Tokenizer.hpp"
 
 // This lexer will be a launching point for me to create a new programming language. For fun.
 
