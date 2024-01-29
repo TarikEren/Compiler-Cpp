@@ -4,9 +4,11 @@ A lexer I made for practice purposes and as a launching point for a compiler I'm
 ### Supported Tokens
 
     UNDEFINED = -1,
+
     //Literals
-    //TODO: Implement Here
     TOKEN_LIT,      //Generic literal
+    
+    //The following literals are not yet implemented
     TOKEN_INT_L,    //Integer literal
     TOKEN_STR_L,    //String literal
     TOKEN_CHAR_L,   //Character literal
@@ -61,6 +63,7 @@ A lexer I made for practice purposes and as a launching point for a compiler I'm
 
     //Miscellaneous
     TOKEN_COMMENT,  // Comment
+    //Block comments are not yet implemented.
     TOKEN_LBRA,     // {
     TOKEN_RBRA,     // }
     TOKEN_LPAR,     // (
