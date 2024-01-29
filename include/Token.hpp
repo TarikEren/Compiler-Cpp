@@ -1,5 +1,4 @@
-#ifndef LEXER_CPP_TOKEN_HPP
-#define LEXER_CPP_TOKEN_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -7,9 +6,11 @@
 using string = std::string;
 
 enum token_types{
+    //Just in case
     UNDEFINED = -1,
-    //Literals
 
+    //Literals
+    //TODO: Implement Here
     TOKEN_LIT,      //Generic literal
     TOKEN_INT_L,    //Integer literal
     TOKEN_STR_L,    //String literal    Might not add this and implement it as a char array
@@ -18,54 +19,59 @@ enum token_types{
     TOKEN_BOOL_L,   //Bool literal
 
     //Keywords
-    TOKEN_VAR,  // var
-    TOKEN_INT,  // int
-    TOKEN_CHAR, // char
-    TOKEN_FLO,  // float
-    TOKEN_BOOL, // bool
-    TOKEN_VOID, // void
-    TOKEN_RET,  // return
-    TOKEN_IF,   // if
-    TOKEN_ELIF, // elif
-    TOKEN_ELSE, // else
-    TOKEN_DO,   // do
-    TOKEN_WHI,  // while
-    TOKEN_FUN,  // function or fun
-    TOKEN_SWI,  // switch
-    TOKEN_CAS,  // case
-    TOKEN_CONS, // const
-    TOKEN_CONT, // continue
+    TOKEN_VAR,      // var
+    TOKEN_INT,      // int
+    TOKEN_CHAR,     // char
+    TOKEN_FLO,      // float
+    TOKEN_BOOL,     // bool
+    TOKEN_VOID,     // void
+    TOKEN_RET,      // return
+    TOKEN_IF,       // if
+    TOKEN_ELIF,     // elif
+    TOKEN_ELSE,     // else
+    TOKEN_DO,       // do
+    TOKEN_WHI,      // while
+    TOKEN_FUN,      // function or fun
+    TOKEN_SWI,      // switch
+    TOKEN_CAS,      // case
+    TOKEN_CONS,     // const
+    TOKEN_CONT,     // continue
 
     //Operators
-    TOKEN_EQ,   // =
-    TOKEN_GD,   // >
-    TOKEN_LD,   // <
-    TOKEN_PLU,  // +
-    TOKEN_MIN,  // -
-    TOKEN_SLA,  // /
-    TOKEN_MOD,  // %
-
-    //Add support for multiple character operators. (Peek function would work)
-    TOKEN_GEQ,  // >=
-    TOKEN_LEQ,  // <=
-    TOKEN_AND,  // &&   "AND"
-    TOKEN_OR,   // ||   "OR"
-    TOKEN_XOR,  // !|   "NOR"
-    TOKEN_NAND, // !&   "XOR"
-    TOKEN_IS, // ==   "IS"
+    TOKEN_EQ,       // =
+    TOKEN_GD,       // >
+    TOKEN_LD,       // <
+    TOKEN_PLU,      // +
+    TOKEN_MIN,      // -
+    TOKEN_SLA,      // /
+    TOKEN_MOD,      // %
+    TOKEN_STAR,     // *
+    TOKEN_AMP,      // &
+    TOKEN_COL,      // :
+    TOKEN_COM,      // ,
+    TOKEN_QUOT,     // "
+    TOKEN_SQUO,     // '
+    TOKEN_PIPE,     // |
+    TOKEN_BANG,     // !
+    TOKEN_NOT,      // !=   "NOT"
+    TOKEN_IS,       // ==   "IS"
+    TOKEN_GEQ,      // >=
+    TOKEN_LEQ,      // <=
+    TOKEN_AND,      // &&   "AND"
+    TOKEN_OR,       // ||   "OR"
+    TOKEN_NOR,      // !|   "NOR"
+    TOKEN_NAND,     // !&   "NAND"
+    TOKEN_INC,      // ++
+    TOKEN_DEC,      // --
 
     //Miscellaneous
-    TOKEN_LBRA, // {
-    TOKEN_RBRA, // }
-    TOKEN_LPAR, // (
-    TOKEN_RPAR, // )
-    TOKEN_SEMI, // ;
-    TOKEN_STAR, // *
-    TOKEN_AMP,  // &
-    TOKEN_COL,  // :
-    TOKEN_QUOT, // "
-    TOKEN_SQUO, // '
-    TOKEN_EOF   // End of file
+    TOKEN_COMMENT,  // Comment
+    TOKEN_LBRA,     // {
+    TOKEN_RBRA,     // }
+    TOKEN_LPAR,     // (
+    TOKEN_RPAR,     // )
+    TOKEN_SEMI,     // ;
+    TOKEN_EOF       // End of file
 };
 
 
@@ -82,7 +88,7 @@ public:
     [[maybe_unused]] void clear_tokenType();
 
     //There has to be another way.
-    [[nodiscard]] string tokenType_to_string() const {
+    [[nodiscard]] inline string tokenType_to_string() const {
         switch (this->token_type) {
             case UNDEFINED:
                 return "UNDEFINED";
@@ -149,14 +155,16 @@ public:
             case TOKEN_SLA:
                 return "TOKEN_SLA";
             case TOKEN_MOD:
-                return "TOKEN_MID";
+                return "TOKEN_MOD";
             case TOKEN_AND:
                 return "TOKEN_AND";
             case TOKEN_OR:
                 return "TOKEN_OR";
+            case TOKEN_COMMENT:
+                return "TOKEN_COMMENT";
                 //Might remove a couple of these next ones.
-            case TOKEN_XOR:
-                return "TOKEN_XOR";
+            case TOKEN_NOR:
+                return "TOKEN_NOR";
             case TOKEN_NAND:
                 return "TOKEN_NAND";
             case TOKEN_IS:
@@ -190,9 +198,5 @@ public:
 
     Token(string, int);
     [[maybe_unused]] Token(const Token&);
-    Token();
     ~Token();
 };
-
-
-#endif //LEXER_CPP_TOKEN_HPP
