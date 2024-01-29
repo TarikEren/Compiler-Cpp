@@ -157,23 +157,16 @@
 //Rather than learning how to use vectors effectively, I made my own dynamic array.
 
 //TODO: Change the tokenize function so that it works on my imaginary language.
-
 int main(int argc, const char* argv[]) {
     if (argc < 2) {
         perror("Please provide a file\n");
         exit(EXIT_FAILURE);
     }
-    Lexer lexer_obj = Lexer();
-    string file_str;
-    if (lexer_obj.read_file(argv[1]))
-        file_str = lexer_obj.get_fileStr();
-
-    if (file_str.empty()) {
-        std::cout << "Exiting program\n";
-        exit(EXIT_FAILURE);
-    }
+    Tokenizer lexer_obj = Tokenizer();
+    lexer_obj.read_file(argv[1]);
     lexer_obj.tokenize();
     lexer_obj.print_tokens();
+
 
     return EXIT_SUCCESS;
 }
