@@ -31,7 +31,7 @@ private:
 
 public:
 
-    //Initialises a tokenizer object
+    //Constructor. Initialises a tokenizer object
     Tokenizer();
 
     //Appends a Token pointer
