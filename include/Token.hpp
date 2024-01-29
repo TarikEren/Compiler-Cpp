@@ -13,7 +13,7 @@ enum token_types{
     //TODO: Implement Here
     TOKEN_LIT,      //Generic literal
     TOKEN_INT_L,    //Integer literal
-    TOKEN_STR_L,    //String literal    Might not add this and implement it as a char array
+    TOKEN_STR_L,    //String literal
     TOKEN_CHAR_L,   //Character literal
     TOKEN_FLO_L,    //Float literal
     TOKEN_BOOL_L,   //Bool literal
