@@ -15,13 +15,11 @@ private:
     //File contents
     string m_file_str;
 
-    //----Array properties----
     //Array itself
     Token** m_array = nullptr;
     //Array's length
     size_t m_array_size = 0;
 
-    //--Iterator properties---
     //Current character
     char m_current = ' ';
     //Current Index
@@ -66,10 +64,12 @@ public:
     //Reads the provided file and initialises the m_file_str variable using the file contents.
     void read_file(const char* filename);
 
-    //Removes a Token pointer from the token m_array
-    [[maybe_unused]] void pop(); //Might pop the m_array one by one as I iterate through it, IDK I haven't done this before.
 
-    //Sets the m_file_str variable using the value that was passed through the function.
+    //Functions after this line might be removed.
+    //Removes a Token pointer from the token m_array
+    [[maybe_unused]] void pop();
+
+    //Sets the m_file_str variable
     [[maybe_unused]] void set_fileStr(string&);
 
     //Returns the m_file_str variable.
