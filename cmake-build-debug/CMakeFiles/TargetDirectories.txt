@@ -1,3 +1,0 @@
-/mnt/d/repos/c-c++/Lexer-Cpp/cmake-build-debug/CMakeFiles/Lexer_Cpp.dir
-/mnt/d/repos/c-c++/Lexer-Cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/d/repos/c-c++/Lexer-Cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
