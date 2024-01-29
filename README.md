@@ -64,6 +64,7 @@ A lexer I made for practice purposes and as a launching point for a compiler I'm
     //Miscellaneous
     TOKEN_COMMENT,  // Comment
     //Block comments are not yet implemented.
+    
     TOKEN_LBRA,     // {
     TOKEN_RBRA,     // }
     TOKEN_LPAR,     // (
