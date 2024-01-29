@@ -67,7 +67,7 @@ enum token_types{
 
     //Miscellaneous
     TOKEN_COMMENT,          // //
-    TOKEN_COMM_START,    // /*
+    TOKEN_COMM_ST,    // /*
     TOKEN_COMM_END,      // */
     TOKEN_LBRA,             // {
     TOKEN_RBRA,             // }
@@ -166,8 +166,8 @@ public:
                 return "TOKEN_OR";
             case TOKEN_COMMENT:
                 return "TOKEN_COMMENT";
-            case TOKEN_COMM_START:
-                return "TOKEN_COMM_START";
+            case TOKEN_COMM_ST:
+                return "TOKEN_COMM_ST";
             case TOKEN_COMM_END:
                 return "TOKEN_COMM_END";
                 //Might remove a couple of these next ones.
