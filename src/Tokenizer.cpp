@@ -1,5 +1,4 @@
 #include "../include/Tokenizer.hpp"
-#include "../include/Macros.hpp"
 
 Tokenizer::Tokenizer()  {
     std::cout << "Tokenizer initialised\n";
@@ -34,7 +33,7 @@ void Tokenizer::print_tokens()  {
     this->file_str = fileStr;
 }
 
-string Tokenizer::get_fileStr()  {
+[[maybe_unused]] string Tokenizer::get_fileStr()  {
     return this->file_str;
 }
 
@@ -46,6 +45,7 @@ void Tokenizer::clean()  {
     this->current_index = 0;
     this->array_size = 0;
     this->file_str.clear();
+    this->buffer.clear();
     free(this->array);
 }
 
@@ -58,7 +58,6 @@ Tokenizer::~Tokenizer()  {
 void Tokenizer::tokenize()  {
     this->current = this->file_str[this->current_index];
     char next;
-    string buffer;
 
     while (current != '\0' && this->current_index != this->file_str.length()) {
         if (current == '(') {
@@ -236,81 +235,79 @@ void Tokenizer::tokenize()  {
         }
         else if (isalnum(current)) {
             while (isalpha(current)) {
-                buffer.push_back(current);
-                this->current_index++;
-                this->current = this->file_str[this->current_index];
+                this->buffer.push_back(current);
+                consume();
             }
 
             while (isdigit(current)) {
-                buffer.push_back(current);
-                this->current_index++;
-                this->current = this->file_str[current_index];
+                this->buffer.push_back(current);
+                consume();
             }
-            if (buffer == "int") {
+            if (this->buffer == "int") {
                 auto new_token = new Token("TOKEN_INT", TOKEN_INT);
                 append_token(new_token);
             }
-            else if (buffer == "return") {
+            else if (this->buffer == "return") {
                 auto new_token = new Token("TOKEN_RET", TOKEN_RET);
                 append_token(new_token);
             }
-            else if (buffer == "var") {
+            else if (this->buffer == "var") {
                 auto new_token = new Token("TOKEN_VAR", TOKEN_VAR);
                 append_token(new_token);
             }
-            else if (buffer == "char") {
+            else if (this->buffer == "char") {
                 auto new_token = new Token("TOKEN_CHAR", TOKEN_CHAR);
                 append_token(new_token);
             }
-            else if (buffer == "float") {
+            else if (this->buffer == "float") {
                 auto new_token = new Token("TOKEN_FLO", TOKEN_FLO);
                 append_token(new_token);
             }
-            else if (buffer == "bool") {
+            else if (this->buffer == "bool") {
                 auto new_token = new Token("TOKEN_BOOL", TOKEN_BOOL);
                 append_token(new_token);
             }
-            else if (buffer == "void") {
+            else if (this->buffer == "void") {
                 auto new_token = new Token("TOKEN_VOID", TOKEN_VOID);
                 append_token(new_token);
             }
-            else if (buffer == "if") {
+            else if (this->buffer == "if") {
                 auto new_token = new Token("TOKEN_IF", TOKEN_IF);
                 append_token(new_token);
             }
-            else if (buffer == "elif") {
+            else if (this->buffer == "elif") {
                 auto new_token = new Token("TOKEN_ELIF", TOKEN_ELIF);
                 append_token(new_token);
             }
-            else if (buffer == "else") {
+            else if (this->buffer == "else") {
                 auto new_token = new Token("TOKEN_ELSE", TOKEN_ELSE);
                 append_token(new_token);
             }
-            else if (buffer == "do") {
+            else if (this->buffer == "do") {
                 auto new_token = new Token("TOKEN_DO", TOKEN_DO);
                 append_token(new_token);
             }
-            else if (buffer == "while") {
+            else if (this->buffer == "while") {
                 auto new_token = new Token("TOKEN_WHI", TOKEN_WHI);
                 append_token(new_token);
             }
-            else if (buffer == "fun") {
+            else if (this->buffer == "fun") {
                 auto new_token = new Token("TOKEN_FUN", TOKEN_FUN);
                 append_token(new_token);
             }
-            else if (buffer == "switch") {
+            else if (this->buffer == "switch") {
                 auto new_token = new Token("TOKEN_SWI", TOKEN_SWI);
                 append_token(new_token);
             }
-            else if (buffer == "case") {
+            else if (this->buffer == "case") {
                 auto new_token = new Token("TOKEN_CAS", TOKEN_CAS);
                 append_token(new_token);
             }
-            else if (buffer == "const") {
+            else if (this->buffer == "const") {
                 auto new_token = new Token("TOKEN_CONS", TOKEN_CONS);
                 append_token(new_token);
             }
-            else if (buffer == "continue") {
+            else if (this->buffer == "continue") {
                 auto new_token = new Token("TOKEN_CONT", TOKEN_CONT);
                 append_token(new_token);
             }
@@ -320,12 +317,11 @@ void Tokenizer::tokenize()  {
                 auto new_token = new Token("TOKEN_LIT", TOKEN_LIT);
                 append_token(new_token);
             }
-            current_index--;
-            buffer.clear();
+            step_back();
+            this->buffer.clear();
         }
 
-        this->current_index++;
-        current = this->file_str[this->current_index];
+        consume();
     }
     auto new_token = new Token("TOKEN_EOF", TOKEN_EOF);
     append_token(new_token);
@@ -336,6 +332,16 @@ char Tokenizer::peek() {
         return this->file_str[this->current_index+1];
     }
     else return this->file_str[this->current_index];
+}
+
+void Tokenizer::consume() {
+    this->current_index++;
+    this->current = this->file_str[this->current_index];
+}
+
+void Tokenizer::step_back() {
+    this->current_index--;
+    this->current = this->file_str[this->current_index];
 }
 
 void Tokenizer::read_file(const char *filename)  {
@@ -349,8 +355,4 @@ void Tokenizer::read_file(const char *filename)  {
     contents = str_stream.str();
     this->file_str = contents;
     file.close();
-}
-
-void Tokenizer::consume() {
-
 }
