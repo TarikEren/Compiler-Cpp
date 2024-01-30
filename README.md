@@ -50,16 +50,18 @@ A lexer I made for practice purposes and as a launching point for a compiler I'm
     TOKEN_SQUO,     // '
     TOKEN_PIPE,     // |
     TOKEN_BANG,     // !
-    TOKEN_NOT,      // !=   "NOT"
-    TOKEN_IS,       // ==   "IS"
     TOKEN_GEQ,      // >=
     TOKEN_LEQ,      // <=
+    TOKEN_INC,      // ++
+    TOKEN_DEC,      // --
+    
+    //Might add support for the words listed below as well
+    TOKEN_NOT,      // !=   "NOT"
+    TOKEN_IS,       // ==   "IS"
     TOKEN_AND,      // &&   "AND"
     TOKEN_OR,       // ||   "OR"
     TOKEN_NOR,      // !|   "NOR"
     TOKEN_NAND,     // !&   "NAND"
-    TOKEN_INC,      // ++
-    TOKEN_DEC,      // --
 
     //Miscellaneous
     TOKEN_COMMENT,  // Comment
