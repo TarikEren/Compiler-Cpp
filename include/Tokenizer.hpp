@@ -64,14 +64,4 @@ public:
     //Reads the provided file and initialises the m_file_str variable using the file contents.
     void read_file(const char* filename);
 
-
-    //Functions after this line might be removed.
-    //Removes a Token pointer from the token m_array
-    [[maybe_unused]] void pop();
-
-    //Sets the m_file_str variable
-    [[maybe_unused]] void set_fileStr(string&);
-
-    //Returns the m_file_str variable.
-    [[maybe_unused]] string get_fileStr();
 };
