@@ -1,7 +1,6 @@
 #include "../include/Tokenizer.hpp"
 
 Tokenizer::Tokenizer()  {
-    std::cout << "Tokenizer initialised\n";
     this->m_array = (Token**)malloc(sizeof(Token) * this->m_array_size);
 }
 
@@ -11,33 +10,13 @@ void Tokenizer::append_token(Token *new_token)  {
     this->m_array[this->m_array_size - 1] = new_token;
 }
 
-[[maybe_unused]] void Tokenizer::pop() {
-    this->m_array_size--;
-    this->m_array = (Token**)realloc(this->m_array, sizeof(Token) * this->m_array_size);
-}
-
 void Tokenizer::print_tokens()  {
     std::cout << "------Tokens Start-------\n";
-    std::cout << "Name\t\t\tIndex\n";
     string token_str;
-    for (int i = 0; i < this->m_array_size; i++) {
-        token_str = this->m_array[i]->get_TokenStr();
-
-        //I couldn't align token_eof, so I came up with this monstrosity.
-        if (token_str == "TOKEN_EOF")
-            std::cout << token_str << "\t\t" << i << std::endl;
-        else
-            std::cout << token_str << "\t" << i << std::endl;
+    for (size_t i = 0; i < this->m_array_size; i++) {
+        std::cout << this->m_array[i]->tokenType_to_string() << std::endl;
     }
     std::cout << "--------Tokens End--------\n";
-}
-
-[[maybe_unused]] void Tokenizer::set_fileStr(string &fileStr)  {
-    this->m_file_str = fileStr;
-}
-
-[[maybe_unused]] string Tokenizer::get_fileStr()  {
-    return this->m_file_str;
 }
 
 void Tokenizer::clean()  {
@@ -55,7 +34,6 @@ void Tokenizer::clean()  {
 
 Tokenizer::~Tokenizer()  {
     clean();
-    std::cout << "Tokenizer has been destructured\n";
 }
 
 void Tokenizer::tokenize()  {
@@ -64,190 +42,179 @@ void Tokenizer::tokenize()  {
 
     while (m_current != '\0' && this->m_current_index != this->m_file_str.length()) {
         if (m_current == '(') {
-            auto new_token = new Token("TOKEN_LPAR", TOKEN_LPAR);
+            auto new_token = new Token(std::nullopt, TOKEN_LPAR);
             append_token(new_token);
         }
         else if (m_current == ')') {
-            auto new_token =  new Token("TOKEN_RPAR", TOKEN_RPAR);
+            auto new_token =  new Token(std::nullopt, TOKEN_RPAR);
             append_token(new_token);
         }
         else if (m_current == '{') {
-            auto new_token = new Token("TOKEN_LBRA", TOKEN_LBRA);
+            auto new_token = new Token(std::nullopt, TOKEN_LBRA);
             append_token(new_token);
         }
         else if (m_current == '}') {
-            auto new_token = new Token("TOKEN_RBRA", TOKEN_RBRA);
+            auto new_token = new Token(std::nullopt, TOKEN_RBRA);
             append_token(new_token);
         }
         else if (m_current == ';') {
-            auto new_token = new Token("TOKEN_SEMI", TOKEN_SEMI);
+            auto new_token = new Token(std::nullopt, TOKEN_SEMI);
             append_token(new_token);
         }
         else if (m_current == '=') {
             next = peek();
             if (next == '=') {
-                auto new_token = new Token("TOKEN_IS", TOKEN_IS);
+                auto new_token = new Token(std::nullopt, TOKEN_IS);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_EQ", TOKEN_EQ);
+                auto new_token = new Token(std::nullopt, TOKEN_EQ);
                 append_token(new_token);
             }
         }
         else if (m_current == '>') {
             next = peek();
             if (next == '=') {
-                auto new_token = new Token("TOKEN_GEQ", TOKEN_GEQ);
+                auto new_token = new Token(std::nullopt, TOKEN_GEQ);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_GD", TOKEN_GD);
+                auto new_token = new Token(std::nullopt, TOKEN_GD);
                 append_token(new_token);
             }
         }
         else if (m_current == '<') {
             next = peek();
             if (next == '=') {
-                auto new_token = new Token("TOKEN_LEQ", TOKEN_LEQ);
+                auto new_token = new Token(std::nullopt, TOKEN_LEQ);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_LD", TOKEN_LD);
+                auto new_token = new Token(std::nullopt, TOKEN_LD);
                 append_token(new_token);
             }
         }
         else if (m_current == '+') {
             next = peek();
             if (next == '+') {
-                auto new_token = new Token("TOKEN_INC", TOKEN_INC);
+                auto new_token = new Token(std::nullopt, TOKEN_INC);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_PLU", TOKEN_PLU);
+                auto new_token = new Token(std::nullopt, TOKEN_PLU);
                 append_token(new_token);
             }
         }
         else if (m_current == '-') {
             next = peek();
             if (next == '-') {
-                auto new_token = new Token("TOKEN_DEC", TOKEN_DEC);
+                auto new_token = new Token(std::nullopt, TOKEN_DEC);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_MIN", TOKEN_MIN);
+                auto new_token = new Token(std::nullopt, TOKEN_MIN);
                 append_token(new_token);
             }
         }
         else if (m_current == '/') {
             next = peek();
             if (next == '/') {
-                auto new_token = new Token("TOKEN_COMMENT", TOKEN_COMMENT);
+                auto new_token = new Token(std::nullopt, TOKEN_COMMENT);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                while (m_current != '\n') {
+                    consume();
+                }
             }
             else if (next == '*') {
-                auto new_token = new Token("TOKEN_COMM_ST", TOKEN_COMM_ST);
+                auto new_token = new Token(std::nullopt, TOKEN_COMM_ST);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_SLA", TOKEN_SLA);
+                auto new_token = new Token(std::nullopt, TOKEN_SLA);
                 append_token(new_token);
             }
         }
         else if (m_current == '%') {
-            auto new_token = new Token("TOKEN_MOD", TOKEN_MOD);
+            auto new_token = new Token(std::nullopt, TOKEN_MOD);
             append_token(new_token);
         }
         else if (m_current == '*') {
             next = peek();
             if (next == '/') {
-                auto new_token = new Token("TOKEN_COMM_END", TOKEN_COMM_END);
+                auto new_token = new Token(std::nullopt, TOKEN_COMM_END);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_STAR", TOKEN_STAR);
+                auto new_token = new Token(std::nullopt, TOKEN_STAR);
                 append_token(new_token);
             }
         }
         else if (m_current == '&') {
             next = peek();
             if (next == '&') {
-                auto new_token = new Token("TOKEN_AND", TOKEN_AND);
+                auto new_token = new Token(std::nullopt, TOKEN_AND);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_AMP", TOKEN_AMP);
+                auto new_token = new Token(std::nullopt, TOKEN_AMP);
                 append_token(new_token);
             }
         }
         else if (m_current == ':') {
-            auto new_token = new Token("TOKEN_COL", TOKEN_COL);
+            auto new_token = new Token(std::nullopt, TOKEN_COL);
             append_token(new_token);
         }
         else if (m_current == '"') {
-            auto new_token = new Token("TOKEN_QUOT", TOKEN_QUOT);
+            auto new_token = new Token(std::nullopt, TOKEN_QUOT);
             append_token(new_token);
         }
         else if (m_current == '!') {
             next = peek();
             if (next == '=') {
-                auto new_token = new Token("TOKEN_NOT", TOKEN_NOT);
+                auto new_token = new Token(std::nullopt, TOKEN_NOT);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else if (next == '|') {
                 auto new_token = new Token("TOKEN_NOR", TOKEN_NOR);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else if (next == '&') {
                 auto new_token = new Token("TOKEN_NAND", TOKEN_NAND);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
                 auto new_token = new Token("TOKEN_BANG", TOKEN_BANG);
                 append_token(new_token);
             }
         }
-        else if (m_current == 39) {
-            auto new_token = new Token("TOKEN_SQUO", TOKEN_SQUO);
+        else if (m_current == '\'') {
+            auto new_token = new Token(std::nullopt, TOKEN_SQUO);
             append_token(new_token);
         }
         else if (m_current == ',') {
-            auto new_token = new Token("TOKEN_COM", TOKEN_COM);
+            auto new_token = new Token(std::nullopt, TOKEN_COM);
             append_token(new_token);
         }
         else if (m_current == '|') {
             next = peek();
             if (next == '|') {
-                auto new_token = new Token("TOKEN_OR", TOKEN_OR);
+                auto new_token = new Token(std::nullopt, TOKEN_OR);
                 append_token(new_token);
-                this->m_current_index++;
-                m_current = this->m_file_str[this->m_current_index];
+                consume();
             }
             else {
-                auto new_token = new Token("TOKEN_PIPE", TOKEN_PIPE);
+                auto new_token = new Token(std::nullopt, TOKEN_PIPE);
                 append_token(new_token);
             }
         }
@@ -262,77 +229,77 @@ void Tokenizer::tokenize()  {
                 consume();
             }
             if (this->m_buffer == "int") {
-                auto new_token = new Token("TOKEN_INT", TOKEN_INT);
+                auto new_token = new Token(std::nullopt, TOKEN_INT);
                 append_token(new_token);
             }
             else if (this->m_buffer == "return") {
-                auto new_token = new Token("TOKEN_RET", TOKEN_RET);
+                auto new_token = new Token(std::nullopt, TOKEN_RET);
                 append_token(new_token);
             }
             else if (this->m_buffer == "var") {
-                auto new_token = new Token("TOKEN_VAR", TOKEN_VAR);
+                auto new_token = new Token(std::nullopt, TOKEN_VAR);
                 append_token(new_token);
             }
             else if (this->m_buffer == "char") {
-                auto new_token = new Token("TOKEN_CHAR", TOKEN_CHAR);
+                auto new_token = new Token(std::nullopt, TOKEN_CHAR);
                 append_token(new_token);
             }
             else if (this->m_buffer == "float") {
-                auto new_token = new Token("TOKEN_FLO", TOKEN_FLO);
+                auto new_token = new Token(std::nullopt, TOKEN_FLO);
                 append_token(new_token);
             }
             else if (this->m_buffer == "bool") {
-                auto new_token = new Token("TOKEN_BOOL", TOKEN_BOOL);
+                auto new_token = new Token(std::nullopt, TOKEN_BOOL);
                 append_token(new_token);
             }
             else if (this->m_buffer == "void") {
-                auto new_token = new Token("TOKEN_VOID", TOKEN_VOID);
+                auto new_token = new Token(std::nullopt, TOKEN_VOID);
                 append_token(new_token);
             }
             else if (this->m_buffer == "if") {
-                auto new_token = new Token("TOKEN_IF", TOKEN_IF);
+                auto new_token = new Token(std::nullopt, TOKEN_IF);
                 append_token(new_token);
             }
             else if (this->m_buffer == "elif") {
-                auto new_token = new Token("TOKEN_ELIF", TOKEN_ELIF);
+                auto new_token = new Token(std::nullopt, TOKEN_ELIF);
                 append_token(new_token);
             }
             else if (this->m_buffer == "else") {
-                auto new_token = new Token("TOKEN_ELSE", TOKEN_ELSE);
+                auto new_token = new Token(std::nullopt, TOKEN_ELSE);
                 append_token(new_token);
             }
             else if (this->m_buffer == "do") {
-                auto new_token = new Token("TOKEN_DO", TOKEN_DO);
+                auto new_token = new Token(std::nullopt, TOKEN_DO);
                 append_token(new_token);
             }
             else if (this->m_buffer == "while") {
-                auto new_token = new Token("TOKEN_WHI", TOKEN_WHI);
+                auto new_token = new Token(std::nullopt, TOKEN_WHI);
                 append_token(new_token);
             }
             else if (this->m_buffer == "fun") {
-                auto new_token = new Token("TOKEN_FUN", TOKEN_FUN);
+                auto new_token = new Token(std::nullopt, TOKEN_FUN);
                 append_token(new_token);
             }
             else if (this->m_buffer == "switch") {
-                auto new_token = new Token("TOKEN_SWI", TOKEN_SWI);
+                auto new_token = new Token(std::nullopt, TOKEN_SWI);
                 append_token(new_token);
             }
             else if (this->m_buffer == "case") {
-                auto new_token = new Token("TOKEN_CAS", TOKEN_CAS);
+                auto new_token = new Token(std::nullopt, TOKEN_CAS);
                 append_token(new_token);
             }
             else if (this->m_buffer == "const") {
-                auto new_token = new Token("TOKEN_CONS", TOKEN_CONS);
+                auto new_token = new Token(std::nullopt, TOKEN_CONS);
                 append_token(new_token);
             }
             else if (this->m_buffer == "continue") {
-                auto new_token = new Token("TOKEN_CONT", TOKEN_CONT);
+                auto new_token = new Token(std::nullopt, TOKEN_CONT);
                 append_token(new_token);
             }
 
-            //Change
+                //Change
             else {
-                auto new_token = new Token("TOKEN_LIT", TOKEN_LIT);
+                auto new_token = new Token(m_buffer, TOKEN_LIT);
                 append_token(new_token);
             }
             step_back();
@@ -341,7 +308,7 @@ void Tokenizer::tokenize()  {
 
         consume();
     }
-    auto new_token = new Token("TOKEN_EOF", TOKEN_EOF);
+    auto new_token = new Token(std::nullopt, TOKEN_EOF);
     append_token(new_token);
 }
 
