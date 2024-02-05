@@ -152,14 +152,13 @@
  *
  * */
 
-
 //DONE: Vector causes multiple destructor call problems. Take a look into it. If the problem still persists, use some other way of storing the tokens.
 //Rather than learning how to use vectors effectively, I made my own dynamic array.
 
 //DONE: Change the tokenize function so that it works on my imaginary language.
+//DONE: Remove unused functions (Later on)
 
 //TODO: Implement support for different types of literals.
-//TODO: Remove unused functions (Later on)
 
 int main(int argc, const char* argv[]) {
     if (argc < 2) {
