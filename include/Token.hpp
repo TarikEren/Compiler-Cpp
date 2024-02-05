@@ -1,12 +1,12 @@
 #pragma once
 
 #include <iostream>
-#include <string>
+#include <optional>
 
 //C++ namespaces are sometimes a nuisance
 using string = std::string;
 
-enum token_types{
+typedef enum token_types{
     //Just in case
     UNDEFINED = -1,
 
@@ -67,31 +67,30 @@ enum token_types{
 
     //Miscellaneous
     TOKEN_COMMENT,          // //
-    TOKEN_COMM_ST,    // /*
-    TOKEN_COMM_END,      // */
+    TOKEN_COMM_ST,          // /*
+    TOKEN_COMM_END,         // */
     TOKEN_LBRA,             // {
     TOKEN_RBRA,             // }
     TOKEN_LPAR,             // (
     TOKEN_RPAR,             // )
     TOKEN_SEMI,             // ;
     TOKEN_EOF               // End of file
-};
-
+}TokenType;
 
 class Token {
 private:
-    //Token string
-    string m_token_str;
+
+//Token string
+    std::optional<string> m_value;
     //Token type
-    int m_token_type;
+    TokenType m_token_type;
 public:
     //Constructor. Initialises a token object using the string and integer provided by the user.
-    Token(string, int);
+    Token(std::optional<string>, TokenType);
     //Destructor. Cleans m_token_str string and sets m_token_type to zero.
     ~Token();
 
     //A gigantic switch-case block to check the token type and return corresponding token string.
-    //There has to be another way.
     [[nodiscard]] inline string tokenType_to_string() const {
         switch (this->m_token_type) {
             case UNDEFINED:
@@ -204,26 +203,4 @@ public:
         }
     }
 
-
-    //Functions after this line might be removed.
-    //Token copy constructor
-    [[maybe_unused]] Token(const Token&);
-
-    //Returns m_token_str.
-    [[nodiscard]] string get_TokenStr() const;
-
-    //Returns m_token_type.
-    [[maybe_unused]] [[nodiscard]] int get_tokenType() const;
-
-    //Sets the m_token_str variable.
-    [[maybe_unused]] void set_tokenStr(const string&);
-
-    //Sets the m_token_type variable.
-    [[maybe_unused]] void set_tokenType(int);
-
-    //Clears the m_token_str variable.
-    [[maybe_unused]] void clear_tokenStr();
-
-    //Sets the m_token_type variable to zero.
-    [[maybe_unused]] void clear_tokenType();
 };
