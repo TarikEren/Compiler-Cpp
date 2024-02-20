@@ -8,4 +8,7 @@ add_executable(better_lexer_cpp main.cpp
         src/Token.cpp
         include/Token.hpp
         include/Tokenizer.hpp
-        include/Macros.hpp)
+        include/Macros.hpp
+        include/Generator.hpp
+        src/Generator.cpp
+)

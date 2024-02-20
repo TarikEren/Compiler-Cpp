@@ -1,5 +1,6 @@
 #include "./include/Token.hpp"
 #include "./include/Tokenizer.hpp"
+#include "./include/Generator.hpp"
 
 // This lexer will be a launching point for me to create a new programming language. For fun.
 
@@ -169,7 +170,7 @@ int main(int argc, const char* argv[]) {
     lexer_obj.read_file(argv[1]);
     lexer_obj.tokenize();
     lexer_obj.print_tokens();
-
+    generate();
 
     return EXIT_SUCCESS;
 }
