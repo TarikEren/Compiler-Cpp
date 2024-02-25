@@ -76,30 +76,27 @@ A compiler I'm making for practice purposes.
 
 ### Planned Syntax
 
-    - Assignment:
+## Assignment: A C ripoff for the most part.
         var 'name' : int = 'value';
 
-    - Loops:
-        - For
-            for (var 'name' : int = 'value'; 'name' < 'limit'; 'name' += 1) {
-                //Code
-            }
-        - While
-            while (condition) {
-            
-            }
+## Loops:
+# For
+        for (; ;) {
+            //Code
+        }
+# While
+        while (condition) {
+            //Code
+        }
 
-    - Statements:
-        - If
-            if (condition) {
-                //Code
-            }
-        - Else if
-            elif (condition) {
-                //Code
-            }
-        - Else 
-            else {
-                //Code
-            }
+## Conditional Statements:
+        if (condition) {
+            //Code
+        }
+        elif (condition) {
+            //Code
+        }
+        else {
+            //Code
+        }
         
