@@ -1,5 +1,5 @@
-# Lexer-Cpp
-A lexer I made for practice purposes and as a launching point for a compiler I'm trying to make.
+# Compiler-Cpp
+A compiler I'm making for practice purposes.
 
 ### Supported Tokens
 
@@ -73,3 +73,30 @@ A lexer I made for practice purposes and as a launching point for a compiler I'm
     TOKEN_RPAR,     // )
     TOKEN_SEMI,     // ;
     TOKEN_EOF       // End of file
+
+### Planned Syntax
+
+## Assignment: A C ripoff for the most part.
+        var 'name' : int = 'value';
+
+## Loops:
+# For
+        for (; ;) {
+            //Code
+        }
+# While
+        while (condition) {
+            //Code
+        }
+
+## Conditional Statements:
+        if (condition) {
+            //Code
+        }
+        elif (condition) {
+            //Code
+        }
+        else {
+            //Code
+        }
+        
