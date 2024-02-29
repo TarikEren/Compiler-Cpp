@@ -3,4 +3,5 @@
 #include <iostream>
 #include <fstream>
 
-void generate();
+void generate_asm();
+void generate_exit();
