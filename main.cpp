@@ -170,7 +170,8 @@ int main(int argc, const char* argv[]) {
     lexer_obj.read_file(argv[1]);
     lexer_obj.tokenize();
     lexer_obj.print_tokens();
-    generate();
+    generate_asm();
+    generate_exit();
 
     return EXIT_SUCCESS;
 }
