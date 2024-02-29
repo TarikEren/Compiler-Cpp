@@ -11,4 +11,8 @@ add_executable(better_lexer_cpp main.cpp
         include/Macros.hpp
         include/Generator.hpp
         src/Generator.cpp
+        include/Parser.hpp
+        include/Parser.hpp
+        src/Parser.cpp
+        src/Parser.cpp
 )
