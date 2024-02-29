@@ -31,7 +31,6 @@ void Tokenizer::clean()  {
     free(this->m_array);
 }
 
-
 Tokenizer::~Tokenizer()  {
     clean();
 }
