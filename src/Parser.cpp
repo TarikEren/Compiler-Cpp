@@ -27,6 +27,17 @@ void Node::set_value(std::optional<int> value) {
     this->value = value;
 }
 
+string Node::get_type() {
+    switch (this->type) {
+        case EXPR:
+            return "EXPR";
+        case NUM:
+            return "NUM";
+        case VAR:
+            return "VAR";
+    }
+}
+
 Node *Tree::get_root() {
     return this->root;
 }
