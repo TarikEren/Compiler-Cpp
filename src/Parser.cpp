@@ -35,7 +35,21 @@ string Node::get_type() {
             return "NUM";
         case VAR:
             return "VAR";
+        default:
+            return "UNDEFINED";
     }
+}
+
+void Node::set_type(Node_Type new_type) {
+    this->type = new_type;
+}
+
+void Node::set_name(string new_name) {
+    this->name = new_name;
+}
+
+string Node::get_name() {
+    return this->name.value();
 }
 
 Node *Tree::get_root() {
